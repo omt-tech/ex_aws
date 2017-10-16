@@ -34,3 +34,9 @@ config :ex_aws, :cloudformation,
   scheme: "https://",
   host: {"$region","cloudformation.$region.amazonaws.com"},
   port: 443
+
+config :ex_aws, :"cognito-idp",
+  scheme: "https://",
+  host: {"$region","cognito-idp.$region.amazonaws.com"},
+  region: "us-west-2",
+  port: 443

@@ -141,6 +141,12 @@ defmodule ExAws.Config.Defaults do
       scheme: "https://",
       region: "us-east-1",
       port: 443
+    },
+    cognitoidp: %{
+      scheme: "https://",
+      host: {"$region", "cognito-idp.$region.amazonaws.com"},
+      region: "us-west-2",
+      port: 443
     }
   }
 
