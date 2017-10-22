@@ -122,9 +122,9 @@ defmodule ExAws.Cognito do
   @spec admin_disable_provider_for_user(user_pool_id :: binary, provider_name :: binary,  provider_attribute_name :: binary, provider_attribute_value :: binary) :: ExAws.Operation.JSON.t
   def admin_disable_provider_for_user(user_pool_id, provider_name, provider_attribute_name, provider_attribute_value) do
     data =  %{:user_pool_id => user_pool_id}
-    |> Map.put(:user, %{provider_attribute_name: provider_attribute_name,
-                       provider_attribute_value: provider_attribute_value,
-                       provider_name: provider_name
+    |> Map.put(:user, %{:provider_attribute_name => provider_attribute_name,
+                       :provider_attribute_value => provider_attribute_value,
+                       :provider_name => provider_name
                        })
     |> camelize_keys
     |> Map.merge(%{})
@@ -200,6 +200,7 @@ defmodule ExAws.Cognito do
 
 
   @doc "AdminGetDevice"
+
   @spec admin_get_device(user_pool_id :: binary , username :: binary, device :: binary) :: ExAws.Operation.JSON.t
   def admin_get_device(user_pool_id, username, device) do
     data = %{:username => username}
@@ -209,6 +210,20 @@ defmodule ExAws.Cognito do
     |> Map.merge(%{})
 
     request(:admin_get_device, data)
+  end
+
+
+  @doc "AdminForgetDevice"
+
+  @spec admin_forget_device(user_pool_id :: binary , username :: binary, device :: binary) :: ExAws.Operation.JSON.t
+  def admin_get_device(user_pool_id, username, device) do
+    data = %{:username => username}
+    |> Map.put(:device_key, device)
+    |> Map.put(:user_pool_id, user_pool_id)
+    |> camelize_keys
+    |> Map.merge(%{})
+
+    request(:admin_forget_device, data)
   end
 
 
