@@ -72,15 +72,15 @@ defmodule ExAws.Cognito do
     {:message_action, binary} |
     {:tempory_password, binary} |
     {:user_attributes, user_attribute} |
-    {:username, binary} |
     {:validation_data, admin_validation_data}
   ]
 
-  @spec admin_create_user(user_pool_id :: binary) :: ExAws.Operation.JSON.t
-  @spec admin_create_user(user_pool_id :: binary, opts :: admin_create_user_opts) :: ExAws.Operation.JSON.t
+  @spec admin_create_user(user_pool_id :: binary, username :: binary) :: ExAws.Operation.JSON.t
+  @spec admin_create_user(user_pool_id :: binary, username :: binary,  opts :: admin_create_user_opts) :: ExAws.Operation.JSON.t
   def admin_create_user(user_pool_id, opts \\ %{}) do
     data = opts
     |> Map.put(:user_pool_id, user_pool_id)
+    |> Map.put(:username, username)
     |> camelize_keys
     |> Map.merge(%{})
 
