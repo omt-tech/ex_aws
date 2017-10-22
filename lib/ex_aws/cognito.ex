@@ -77,10 +77,25 @@ defmodule ExAws.Cognito do
 
   @spec admin_create_user(user_pool_id :: binary, username :: binary) :: ExAws.Operation.JSON.t
   @spec admin_create_user(user_pool_id :: binary, username :: binary,  opts :: admin_create_user_opts) :: ExAws.Operation.JSON.t
-  def admin_create_user(user_pool_id, opts \\ %{}) do
+  def admin_create_user(user_pool_id, username, opts \\ %{}) do
     data = opts
     |> Map.put(:user_pool_id, user_pool_id)
     |> Map.put(:username, username)
+    |> camelize_keys
+    |> Map.merge(%{})
+
+    request(:admin_create_user, data)
+  end
+
+
+  @doc "AdminAddUserToGroup"
+
+  @spec admin_create_user(user_pool_id :: binary, username :: binary,  group_name :: binary) :: ExAws.Operation.JSON.t
+  def admin_add_user_to_group(user_pool_id, username, group_name) do
+    data = opts
+    |> Map.put(:user_pool_id, user_pool_id)
+    |> Map.put(:username, username)
+    |> Map.put(:group_name, group_name)
     |> camelize_keys
     |> Map.merge(%{})
 
