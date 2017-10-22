@@ -16,6 +16,7 @@ defmodule ExAws.Cognito do
   # ExAws.Cognito.list_users(%{:user_pool_id => "us-west-2_e3v0YLSV2"}) |> ExAws.request
 
   @doc "ListUsers"
+
   @type user_pool_id :: binary
   @type username :: binary
 
@@ -54,6 +55,7 @@ defmodule ExAws.Cognito do
     request(:admin_list_devices, data)
   end
 
+
   @type admin_validation_data :: {
     :name, binary |
     :value, binary
@@ -66,6 +68,7 @@ defmodule ExAws.Cognito do
 
 
   @doc "AdminCreateUser"
+
   @type admin_create_user_opts :: [
     {:limit, pos_integer} |
     {:desired_delivery_mediums, binary} |
@@ -134,6 +137,7 @@ defmodule ExAws.Cognito do
 
 
   @doc "AdminUpdateUserAttributes"
+
   @type admin_update_user_attributes :: [
     {:user_attributes, user_attribute}
   ]
@@ -152,6 +156,7 @@ defmodule ExAws.Cognito do
 
 
   @doc "AdminDeleteUser"
+
   @spec admin_delete_user(user_pool_id :: binary, username :: binary) :: ExAws.Operation.JSON.t
   def admin_delete_user(user_pool_id, username) do
     data = %{:username => username}
@@ -164,6 +169,7 @@ defmodule ExAws.Cognito do
 
 
   @doc "AdminEnableUser"
+
   @spec admin_enable_user(user_pool_id :: binary, username :: binary) :: ExAws.Operation.JSON.t
   def admin_enable_user(user_pool_id, username) do
     data = %{:username => username}
@@ -176,6 +182,7 @@ defmodule ExAws.Cognito do
 
 
   @doc "AdminDisableUser"
+
   @spec admin_disable_user(user_pool_id :: binary, username :: binary) :: ExAws.Operation.JSON.t
   def admin_disable_user(user_pool_id, username) do
     data = %{:username => username}
@@ -188,6 +195,7 @@ defmodule ExAws.Cognito do
 
 
   @doc "AdminGetUser"
+
   @spec admin_get_user(user_pool_id :: binary, username :: binary) :: ExAws.Operation.JSON.t
   def admin_get_user(user_pool_id, username) do
     data = %{:username => username}
@@ -241,6 +249,7 @@ defmodule ExAws.Cognito do
 
 
   @doc "AdminResetUserPassword"
+
   @spec admin_reset_user_password(user_pool_id :: binary, username :: binary) :: ExAws.Operation.JSON.t
   def admin_reset_user_password(user_pool_id, username) do
     data = %{:username => username}
