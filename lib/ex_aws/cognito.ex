@@ -99,7 +99,7 @@ defmodule ExAws.Cognito do
     |> camelize_keys
     |> Map.merge(%{})
 
-    request(:admin_create_user, data)
+    request(:admin_add_user_to_group, data)
   end
 
 
