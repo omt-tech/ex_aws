@@ -64,6 +64,7 @@ defmodule ExAws.Cognito do
     :value, binary
   }
 
+
   @doc "AdminCreateUser"
   @type admin_create_user_opts :: [
     {:limit, pos_integer} |
@@ -161,6 +162,7 @@ defmodule ExAws.Cognito do
     request(:admin_delete_user, data)
   end
 
+
   @doc "AdminEnableUser"
   @spec admin_enable_user(user_pool_id :: binary, username :: binary) :: ExAws.Operation.JSON.t
   def admin_enable_user(user_pool_id, username) do
@@ -171,6 +173,7 @@ defmodule ExAws.Cognito do
 
     request(:admin_enable_user, data)
   end
+
 
   @doc "AdminDisableUser"
   @spec admin_disable_user(user_pool_id :: binary, username :: binary) :: ExAws.Operation.JSON.t
@@ -183,6 +186,7 @@ defmodule ExAws.Cognito do
     request(:admin_disable_user, data)
   end
 
+
   @doc "AdminGetUser"
   @spec admin_get_user(user_pool_id :: binary, username :: binary) :: ExAws.Operation.JSON.t
   def admin_get_user(user_pool_id, username) do
@@ -193,6 +197,7 @@ defmodule ExAws.Cognito do
 
     request(:admin_get_user, data)
   end
+
 
   @doc "AdminGetDevice"
   @spec admin_get_device(user_pool_id :: binary , username :: binary, device :: binary) :: ExAws.Operation.JSON.t
@@ -219,6 +224,7 @@ defmodule ExAws.Cognito do
     request(:admin_confirm_sign_up, data)
   end
 
+
   @doc "AdminResetUserPassword"
   @spec admin_reset_user_password(user_pool_id :: binary, username :: binary) :: ExAws.Operation.JSON.t
   def admin_reset_user_password(user_pool_id, username) do
@@ -229,6 +235,7 @@ defmodule ExAws.Cognito do
 
     request(:admin_reset_user_password, data)
   end
+
 
   @doc "AdminUserGlobalSignOut"
 
