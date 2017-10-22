@@ -103,6 +103,21 @@ defmodule ExAws.Cognito do
   end
 
 
+  @doc "AdminDeleteUserAttributes"
+
+  @spec admin_delete_user_attributes(user_pool_id :: binary, username :: binary,  user_attribute_names :: list) :: ExAws.Operation.JSON.t
+  def admin_delete_user_attributes(user_pool_id, username, user_attribute_names) do
+    data = opts
+    |> Map.put(:user_pool_id, user_pool_id)
+    |> Map.put(:username, username)
+    |> Map.put(:user_attribute_names, user_attribute_names)
+    |> camelize_keys
+    |> Map.merge(%{})
+
+    request(:admin_delete_user_attributes, data)
+  end
+
+
   @doc "AdminUpdateUserAttributes"
   @type admin_update_user_attributes :: [
     {:user_attributes, user_attribute}
