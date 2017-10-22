@@ -39,22 +39,6 @@ defmodule ExAws.Cognito do
 
 
   @doc "AdminListDevices"
-  @type admin_list_devices_opts :: [
-    {:limit, pos_integer} |
-    {:pagination_token, binary}
-  ]
-  @spec admin_list_devices(user_pool_id :: binary, username :: binary) :: ExAws.Operation.JSON.t
-  @spec admin_list_devices(user_pool_id :: binary, username :: binary, opts :: admin_list_devices_opts) :: ExAws.Operation.JSON.t
-  def admin_list_devices(user_pool_id, username, opts \\ %{}) do
-    data = opts
-    |> Map.put(:user_pool_id, user_pool_id)
-    |> Map.put(:username, username)
-    |> camelize_keys
-    |> Map.merge(%{})
-
-    request(:admin_list_devices, data)
-  end
-
 
   @type admin_validation_data :: {
     :name, binary |
@@ -271,6 +255,19 @@ defmodule ExAws.Cognito do
     |> Map.merge(%{})
 
     request(:admin_user_global_sign_out, data)
+  end
+
+
+  @doc "AddCustomAttributes"
+
+  @spec add_custom_attributes(user_pool_id :: binary, custom_attributes :: list) :: ExAws.Operation.JSON.t
+  def add_custom_attributes(user_pool_id, custom_attributes) do
+    data = %{:user_pool_id => user_pool_id}
+    |> Map.put(:custom_attributres, custom_attributes)
+    |> camelize_keys
+    |> Map.merge(%{})
+
+    request(:add_custom_attributes, data)
   end
 
 
