@@ -92,8 +92,7 @@ defmodule ExAws.Cognito do
 
   @spec admin_create_user(user_pool_id :: binary, username :: binary,  group_name :: binary) :: ExAws.Operation.JSON.t
   def admin_add_user_to_group(user_pool_id, username, group_name) do
-    data = opts
-    |> Map.put(:user_pool_id, user_pool_id)
+    data = %{:user_pool_id => user_pool_id}
     |> Map.put(:username, username)
     |> Map.put(:group_name, group_name)
     |> camelize_keys
@@ -107,14 +106,29 @@ defmodule ExAws.Cognito do
 
   @spec admin_delete_user_attributes(user_pool_id :: binary, username :: binary,  user_attribute_names :: list) :: ExAws.Operation.JSON.t
   def admin_delete_user_attributes(user_pool_id, username, user_attribute_names) do
-    data = opts
-    |> Map.put(:user_pool_id, user_pool_id)
+    data = %{:user_pool_id => user_pool_id}
     |> Map.put(:username, username)
     |> Map.put(:user_attribute_names, user_attribute_names)
     |> camelize_keys
     |> Map.merge(%{})
 
     request(:admin_delete_user_attributes, data)
+  end
+
+
+  @doc "AdminDisableProviderForUser"
+
+  @spec admin_disable_provider_for_user(user_pool_id :: binary, provider_name :: binary,  provider_attribute_name :: binary, provider_attribute_value :: binary) :: ExAws.Operation.JSON.t
+  def admin_disable_provider_for_user(user_pool_id, provider_name, provider_attribute_name, provider_attribute_value) do
+    data =  %{:user_pool_id => user_pool_id}
+    |> Map.put(:user, %{provider_attribute_name: provider_attribute_name,
+                       provider_attribute_value: provider_attribute_value,
+                       provider_name: provider_name
+                       })
+    |> camelize_keys
+    |> Map.merge(%{})
+
+    request(:admin_disable_provider_for_user, data)
   end
 
 
