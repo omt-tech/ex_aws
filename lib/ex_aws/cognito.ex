@@ -50,6 +50,23 @@ defmodule ExAws.Cognito do
     :value, binary
   }
 
+  @type list_users_opts :: [
+    {:pagination_token, binary} |
+    {:limit, pos_integer}
+  ]
+
+  @spec admin_list_devices(user_pool_id :: binary, username :: binary) :: ExAws.Operation.JSON.t
+  @spec admin_list_devices(user_pool_id :: binary, username :: binary, opts :: list_devices_opts) :: ExAws.Operation.JSON.t
+  def admin_list_devices(user_pool_id, username, opts \\ %{}) do
+    data = opts
+    |> Map.put(:user_pool_id, user_pool_id)
+    |> Map.put(:username, username)
+    |> camelize_keys
+    |> Map.merge(%{})
+
+    request(:admin_list_devices, data)
+  end
+
 
   @doc "AdminCreateUser"
 
@@ -268,6 +285,19 @@ defmodule ExAws.Cognito do
     |> Map.merge(%{})
 
     request(:add_custom_attributes, data)
+  end
+
+
+  @doc "AdminInitiateAuth"
+
+  @spec admin_initiate_auth(user_pool_id :: binary, client_id :: binary) :: ExAws.Operation.JSON.t
+  def admin_initiate_auth(user_pool_id, client_id, analytics_metadata, auth_flow, auth_parameters, client_metadata) do
+    data = %{:user_pool_id => user_pool_id}
+    |> Map.put(:client_id, client_id)
+    |> camelize_keys
+    |> Map.merge(%{})
+
+    request(:admin_initiate_auth, data)
   end
 
 
